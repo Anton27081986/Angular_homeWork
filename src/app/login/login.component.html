@@ -1,0 +1,27 @@
+<form class="example-form" [formGroup]="form">
+  <h2>Login</h2>
+
+  <div class="form-control">
+    <mat-form-field class="form-field_wrapper" appearance="outline">
+      <mat-label>Enter your email</mat-label>
+      <input [formControl]="email" matInput placeholder="aasipenka@demo.com">
+      <mat-icon matSuffix class="fas fa-envelope"></mat-icon>
+      <mat-hint>login</mat-hint>
+    </mat-form-field>
+  </div>
+
+  <div class="form-control">
+    <mat-form-field class="form-field_wrapper" appearance="outline">
+      <mat-label>Enter your password</mat-label>
+      <input [formControl]="password" matInput placeholder="QWERTY12345...">
+      <mat-icon matSuffix class="fas fa-key"></mat-icon>
+      <mat-hint>password</mat-hint>
+    </mat-form-field>
+  </div>
+
+  <div class="btn-wrapper">
+    <button (click)="logIn()" [disabled]="form.invalid" mat-raised-button type="submit" class="btn">
+      Login
+    </button>
+  </div>
+</form>
