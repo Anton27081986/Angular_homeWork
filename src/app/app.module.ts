@@ -29,13 +29,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 const routes: Route[] = [
-    { path: '', redirectTo: 'registration', pathMatch: 'full' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'films', component: FilmsComponent },
     { path: 'music', component: MusicComponent },
     { path: 'picture', component: PictureComponent },
     { path: 'admin', component: AdminComponent },
     { path: 'registration', component: RegistrationComponent },
-    { path: 'login', component: LoginComponent }
+    { path: 'login', component: LoginComponent },
+    { path: 'news', component: NewsComponent }
+
 ];
 
 @NgModule({

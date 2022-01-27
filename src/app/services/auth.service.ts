@@ -21,7 +21,15 @@ export class AuthService {
         return this.http.post<IAuthenticationInfo>(`${environment.APIUrl}/auth/registration`, object);
     }
 
-    public logining(object: ILoginData): Observable<IAuthenticationInfo> {
+    public login(object: ILoginData): Observable<IAuthenticationInfo> {
         return this.http.post<IAuthenticationInfo>(`${environment.APIUrl}/auth/login`, object);
+    }
+
+    public setUserEmail(email: string) {
+        localStorage.setItem('email', email);
+    }
+
+    public setUserToken(authInfo: IAuthenticationInfo) {
+        localStorage.setItem('token', authInfo.token);
     }
 }

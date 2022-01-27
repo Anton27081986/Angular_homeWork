@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service'
 
 
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
     public password = new FormControl('', [Validators.required, Validators.minLength(5)]);
 
 
-    constructor(private loginServices: AuthService) { }
+    constructor(private authService: AuthService, private router: Router) { }
 
     ngOnInit(): void {
         this.form = new FormGroup({
@@ -24,11 +25,18 @@ export class LoginComponent implements OnInit {
         })
     }
 
-    public logIn() {
-        console.log(this.form);
-        this.loginServices.logining(this.form.value)
-            .subscribe(data => {
-                console.log(data);
-            });
+    public logIn(): void {
+        this.authService.login(this.form.value)
+            .subscribe((data) => {
+                this.authService.setUserEmail(this.form.value.email);
+                this.authService.setUserToken(data);
+                this.form.reset();
+                this.router.navigate(['/news']).then()
+            },
+                () => { alert('Не верный Логин или Пароль') }
+            );
+
     }
+
+
 }

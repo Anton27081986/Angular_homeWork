@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 interface IUser {
@@ -15,8 +16,17 @@ interface IUser {
 
 export class AppComponent implements OnInit, OnDestroy {
 
-	constructor() {
+	public authOut: boolean;
+
+	constructor(private router: Router) {
+		this.router.events.subscribe(() => {
+			if (localStorage.getItem('token')) {
+				this.authOut = true;
+
+			}
+		})
 		console.log('constructor');
+
 	}
 
 	ngOnInit(): void {
@@ -25,5 +35,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
 	ngOnDestroy(): void {
 		console.log('ng OnDestroy');
+	}
+
+	public logOut() {
+		localStorage.clear();
 	}
 }

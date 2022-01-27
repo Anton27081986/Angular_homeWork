@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="authOut">
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
@@ -12,6 +12,9 @@
     <button mat-menu-item>
       <span routerLink="/picture">Picture</span>
     </button>
+    <button mat-menu-item>
+      <span routerLink="/news">News</span>
+    </button>
   </mat-menu>
   <span>My App</span>
   <span class="example-spacer"></span>
@@ -22,10 +25,7 @@
     <mat-icon>share</mat-icon>
   </button>
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <span routerLink="/admin">Admin</span>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <span routerLink="/login">Exit</span>
+    <span routerLink="/login" (click)="logOut()">Exit</span>
   </button>
 
 </mat-toolbar>

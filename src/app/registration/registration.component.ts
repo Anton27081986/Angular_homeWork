@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -16,7 +17,9 @@ export class RegistrationComponent implements OnInit {
     public password = new FormControl('', [Validators.required, Validators.minLength(5)]);
 
 
-    constructor(private authService: AuthService) { }
+
+
+    constructor(private authService: AuthService, private router: Router) { }
 
     ngOnInit(): void {
         this.form = new FormGroup({
@@ -28,10 +31,17 @@ export class RegistrationComponent implements OnInit {
     }
 
     public registration(): void {
-        console.log(this.form);
         this.authService.registration(this.form.value)
-            .subscribe(data => {
+            .subscribe((data) => {
                 console.log(data);
-            });
+                this.authService.setUserEmail(this.form.value.email);
+                this.authService.setUserToken(data);
+                this.form.reset();
+                this.router.navigate(['/news']).then();
+            },
+                () => { alert('Данный пользователь уже существует') }
+            );
     }
+
 }
+
